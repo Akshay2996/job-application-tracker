@@ -10,6 +10,9 @@ export default function Home() {
             <h1 className="text-black">
               A better way to track job applications.
             </h1>
+            <p className="text-muted-foreground">
+              Capture, organize and manage your job search in one place.
+            </p>
           </div>
         </section>
       </main>
