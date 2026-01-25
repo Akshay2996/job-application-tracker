@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 
 export default function Home() {
@@ -16,7 +17,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col items-center gap-4">
               <Button size="lg" className="h-12 px-8 text-lg font-medium">
-                Start for free
+                Start for free <ArrowRight className="ml-2" />
               </Button>
               <p className="text-sm text-muted-foreground">
                 Free forever. No credit card required.
