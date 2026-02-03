@@ -4,11 +4,9 @@ import { Briefcase } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
-import { getSession } from "@/lib/auth/auth";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
