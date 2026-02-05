@@ -32,12 +32,21 @@ const INITIAL_FORM_DATA = {
   description: "",
 };
 
-export default function CreateJobApplication({
+export default function CreateJobApplicationDialog({
   columnId,
   boardId,
 }: CreateJobApplicationProps) {
   const [open, setOpen] = useState<boolean>(false);
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+    } catch (error) {
+      console.error("Error creating job application: ", error);
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -55,7 +64,7 @@ export default function CreateJobApplication({
           <DialogTitle>Add Job Application</DialogTitle>
           <DialogDescription>Track a new job application</DialogDescription>
         </DialogHeader>
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
