@@ -14,18 +14,33 @@ import {
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
+import { useState } from "react";
 
 interface CreateJobApplicationProps {
   columnId: string;
   boardId: string;
 }
 
+const INITIAL_FORM_DATA = {
+  company: "",
+  position: "",
+  location: "",
+  notes: "",
+  salary: "",
+  jobUrl: "",
+  tags: "",
+  description: "",
+};
+
 export default function CreateJobApplication({
   columnId,
   boardId,
 }: CreateJobApplicationProps) {
+  const [open, setOpen] = useState<boolean>(false);
+  const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
           variant="outline"
@@ -45,36 +60,81 @@ export default function CreateJobApplication({
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="company">Company *</Label>
-                <Input id="company" required />
+                <Input
+                  id="company"
+                  value={formData.company}
+                  onChange={(e) =>
+                    setFormData({ ...formData, company: e.target.value })
+                  }
+                  required
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="position">Position *</Label>
-                <Input id="position" required />
+                <Input
+                  id="position"
+                  value={formData.position}
+                  onChange={(e) =>
+                    setFormData({ ...formData, position: e.target.value })
+                  }
+                  required
+                />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="location">Location</Label>
-                <Input id="location" />
+                <Input
+                  id="location"
+                  value={formData.location}
+                  onChange={(e) =>
+                    setFormData({ ...formData, location: e.target.value })
+                  }
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="salary">Salary</Label>
-                <Input id="salary" placeholder="₹10L - ₹30L" />
+                <Input
+                  id="salary"
+                  placeholder="₹10L - ₹30L"
+                  value={formData.salary}
+                  onChange={(e) =>
+                    setFormData({ ...formData, salary: e.target.value })
+                  }
+                />
               </div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="jobUrl">Job Url</Label>
-              <Input id="jobUrl" placeholder="https://..." />
+              <Input
+                id="jobUrl"
+                value={formData.jobUrl}
+                onChange={(e) =>
+                  setFormData({ ...formData, jobUrl: e.target.value })
+                }
+                placeholder="https://..."
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="tags">Tags (comma-separated)</Label>
-              <Input id="tags" placeholder="React, Tailwind, Node.js" />
+              <Input
+                id="tags"
+                value={formData.tags}
+                onChange={(e) =>
+                  setFormData({ ...formData, tags: e.target.value })
+                }
+                placeholder="React, Tailwind, Node.js"
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="description">Description</Label>
               <Textarea
                 id="description"
                 rows={3}
+                value={formData.description}
+                onChange={(e) =>
+                  setFormData({ ...formData, description: e.target.value })
+                }
                 placeholder="Brief description of the role..."
               />
             </div>
@@ -83,13 +143,23 @@ export default function CreateJobApplication({
               <Textarea
                 id="notes"
                 rows={4}
+                value={formData.notes}
+                onChange={(e) =>
+                  setFormData({ ...formData, notes: e.target.value })
+                }
                 placeholder="Additional notes or comments"
               />
             </div>
           </div>
 
           <DialogFooter>
-            <Button type="button" variant="outline">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => {
+                setOpen(false);
+              }}
+            >
               Cancel
             </Button>
             <Button type="submit">Add Job</Button>
